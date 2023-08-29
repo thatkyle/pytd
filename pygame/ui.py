@@ -7,7 +7,7 @@ class UI:
         self.screen_width = screen_width
         self.screen_height = screen_height
         self.buttons = [f"{i+1}" for i in range(10)]
-        self.current_buttons = []
+        self.current_buttons = random.sample(self.buttons, 4)
         self.gold = 0
         self.last_gold_update = time.time()
         self.last_button_update = time.time()
@@ -20,7 +20,7 @@ class UI:
             self.last_gold_update = time.time()
         
         # Update buttons every 30 seconds
-        if self.last_button_update - self.start_time < 0.001 or time.time() - self.last_button_update >= 30:
+        if time.time() - self.last_button_update >= 30:
             self.current_buttons = random.sample(self.buttons, 4)
             self.last_button_update = time.time()
 
