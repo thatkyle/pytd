@@ -3,13 +3,20 @@ from enemy import EnemyManager
 from tower import Tower
 from ui import UI
 from constants import *
+from shop import Shop
+#from weapon import Weapon, WeaponManager
 
 class Game(InitGame):
+    getters = []
+    
     def __init__(self):
         super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT, 'Tower Defense')
+        for getter in Game.getters:
+            setattr(self, getter.__name__, lambda getter=getter: getter(self))
         self.enemy_manager = EnemyManager(SCREEN_WIDTH, SCREEN_HEIGHT)
         self.tower = Tower(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)
-        self.ui = UI(SCREEN_WIDTH, SCREEN_HEIGHT)
+        self.shop = Shop()
+        self.ui = UI(SCREEN_WIDTH, SCREEN_HEIGHT, self.get_shop_number_of_items)
         
     def update(self):
         self.ui.update()
