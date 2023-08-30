@@ -3,7 +3,7 @@ from weapon_factory import weapon_factory
 all_weapons = []
 
 # Air weapons
-all_weapons.append(weapon_factory("Windfang", "Air", 25, 3, 1.0, 'single target', 10, 'circle', 'small', 500))
+all_weapons.append(weapon_factory("Windfang", "Air", 100, 300, 1000, 'single target', 10, 'circle', 'small', 500))
 all_weapons.append(weapon_factory("Zephyrblade", "Air", 40, 4, 0.8, 'splash', 15, 'triangle', 'small', 1000))
 all_weapons.append(weapon_factory("Galeforce", "Air", 60, 5, 0.7, 'bounce', 20, 'star', 'medium', 2000))
 all_weapons.append(weapon_factory("Tempeststrike", "Air", 100, 6, 0.5, 'splash', 25, 'square', 'medium', 5000))

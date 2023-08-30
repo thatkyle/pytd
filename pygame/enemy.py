@@ -53,7 +53,6 @@ class EnemyManager:
     def update_enemies(self):
         for enemy in self.enemies:
             enemy.move_towards_center(self.screen_width // 2, self.screen_height // 2)
-            enemy.damage(1)
     
     def draw_enemies(self, screen, color):
         for enemy in self.enemies:

@@ -1,3 +1,7 @@
+# The get_ getter functions are loaded into the Game class in game.py and are used to
+# facillitate passing attributes between classes. Any time you are reading data from
+# one class in another class, you should define it here
+
 from game import Game
 
 def add_getter(func):
