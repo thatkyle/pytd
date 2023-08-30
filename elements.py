@@ -2,31 +2,31 @@ elements = {
     'Fire': {
         'color_name': 'Orange',
         'color_code': (255, 179, 71),
-        'weak_to': 'Water',
+        'weak_against': 'Water',
         'strong_against': 'Ice'
     },
     'Water': {
         'color_name': 'Deep Blue',
         'color_code': (0, 0, 139),
-        'weak_to': 'Ice',
+        'weak_against': 'Ice',
         'strong_against': 'Fire'
     },
     'Ice': {
         'color_name': 'Light Blue',
         'color_code': (209, 230, 245),
-        'weak_to': 'Air',
+        'weak_against': 'Air',
         'strong_against': 'Water'
     },
     'Air': {
         'color_name': 'White',
         'color_code': (245, 245, 245),
-        'weak_to': 'Earth',
+        'weak_against': 'Earth',
         'strong_against': 'Ice'
     },
     'Earth': {
         'color_name': 'Brown',
         'color_code': (139, 69, 19),
-        'weak_to': 'Fire',
+        'weak_against': 'Fire',
         'strong_against': 'Air'
     },
     'Chaos': {
