@@ -3,6 +3,7 @@ import math
 import random
 import time
 from constants import *
+from elements import elements
 
 class Enemy:
     def __init__(self, x, y, speed=2.0, radius=10, max_health=100):
@@ -12,6 +13,8 @@ class Enemy:
         self.radius = radius
         self.max_health = max_health
         self.current_health = max_health
+        self.element = random.choice(list(elements.keys()))
+        self.color = elements[self.element]['color_code']
 
     def move_towards_center(self, center_x, center_y):
         dx = center_x - self.x
@@ -29,6 +32,10 @@ class Enemy:
         fill = (self.current_health / self.max_health) * health_bar_length
         pygame.draw.rect(screen, RED, (self.x - health_bar_length // 2, self.y - self.radius - 6, health_bar_length, health_bar_height))
         pygame.draw.rect(screen, GREEN, (self.x - health_bar_length // 2, self.y - self.radius - 6, fill, health_bar_height))
+
+    def draw_enemy(self, screen):
+        pygame.draw.circle(screen, self.color, (int(self.x), int(self.y)), self.radius)
+        self.draw_health_bar(screen)
 
     def damage(self, amount):
         self.current_health -= amount
@@ -59,7 +66,6 @@ class EnemyManager:
         for enemy in self.enemies:
             enemy.move_towards_center(self.screen_width // 2, self.screen_height // 2)
     
-    def draw_enemies(self, screen, color):
+    def draw_enemies(self, screen):
         for enemy in self.enemies:
-            pygame.draw.circle(screen, color, (int(enemy.x), int(enemy.y)), enemy.radius)
-            enemy.draw_health_bar(screen)
+            enemy.draw_enemy(screen)

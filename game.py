@@ -51,7 +51,7 @@ class Game(InitGame):
         self.screen.fill(BLACK)
         self.ui.draw(self.screen)
         self.tower.draw(self.screen)
-        self.enemy_manager.draw_enemies(self.screen, RED)
+        self.enemy_manager.draw_enemies(self.screen)
         self.weapon_manager.draw_weapons(self.screen)
     
         current_time = pygame.time.get_ticks()

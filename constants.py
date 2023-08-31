@@ -1,6 +1,6 @@
 # Screen dimensions
-SCREEN_WIDTH = 2560
-SCREEN_HEIGHT = 1440
+SCREEN_WIDTH = 1280
+SCREEN_HEIGHT = 720
 
 # Tower settings
 TOWER_RADIUS = 20
