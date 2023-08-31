@@ -30,12 +30,20 @@ class Weapon:
     def draw_weapon(self, screen):
         pygame.draw.circle(screen, self.color_code, (self.x, self.y), 5)
     
-    def face_enemy(self, enemies):
+    def fire_weapon(self, enemies):
         enemies_in_range = [e for e in enemies if sqrt((self.x - e.x)**2 + (self.y - e.y)**2) <= self.attack_range]
-        if not enemies_in_range:
-            return
+        # can only fire weapon if there is an enemy in range to target
+        can_fire_weapon = len(enemies_in_range) > 0
+        if can_fire_weapon == False:
+            # can't add a new weapon until the existing weapon fires
+            can_add_weapon = False
+            # we return can_add_weapon to 1) notify WeaponManager that a new weapon can't be added, and 
+            # 2) break out of the function before firing the weapon
+            return can_add_weapon
         closest_enemy = min(enemies_in_range, key=lambda e: sqrt((self.x - e.x)**2 + (self.y - e.y)**2))
         self.angle = atan2(closest_enemy.y - self.y, closest_enemy.x - self.x)
+        can_add_weapon = True
+        return can_add_weapon
     
     # def spawn_weapon(self, weapons):
     #     weapons.append({'x': self.x, 'y': self.y, 'speed': self.projectile_speed, 'angle': self.angle, 'model': self.projectile_model, 'size': self.projectile_size})
@@ -54,10 +62,10 @@ class Weapon:
         for enemy in enemies[:]:
             distance = sqrt((self.x - enemy.x) ** 2 + (self.y - enemy.y) ** 2)
             if distance < 10:
-                # if enemy.element_type == self.strong_against:
-                #     self.damage *= 1.5
-                # elif enemy.element_type == self.weak_against:
-                #     self.damage *= 0.5
+                if enemy.element == self.strong_against:
+                    self.damage *= 1.5
+                elif enemy.element == self.weak_against:
+                    self.damage *= 0.5
                 enemy.current_health -= self.damage
                 self.is_destroyed = True
                 break  # A weapon can only hit one enemy
@@ -66,8 +74,9 @@ class Weapon:
 class WeaponManager:
     def __init__(self):
         self.weapons = []
+        self.can_add_weapon = True
 
-    def add_weapon(self, screen):
+    def add_weapon(self):
         weapon = Weapon(
             all_weapons[0]['name'],
             all_weapons[0]['element_type'],
@@ -89,9 +98,10 @@ class WeaponManager:
     
     def remove_weapons(self):
         self.weapons = [w for w in self.weapons if w.is_destroyed == False]
+
     def update_weapons(self, enemies):
         for weapon in self.weapons:
             if weapon.angle == None:
-                weapon.face_enemy(enemies)
+                self.can_add_weapon = weapon.fire_weapon(enemies)
             else:
                 weapon.update_weapon(enemies)

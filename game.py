@@ -53,8 +53,8 @@ class Game(InitGame):
         self.tower.draw(self.screen)
         self.enemy_manager.draw_enemies(self.screen)
         self.weapon_manager.draw_weapons(self.screen)
-    
+
         current_time = pygame.time.get_ticks()
-        if current_time >= self.next_time_to_act:
-            attack_speed = self.weapon_manager.add_weapon(self.screen)
+        if self.weapon_manager.can_add_weapon is True and current_time >= self.next_time_to_act:
+            attack_speed = self.weapon_manager.add_weapon()
             self.next_time_to_act = current_time + attack_speed
