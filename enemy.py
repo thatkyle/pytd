@@ -46,8 +46,13 @@ class EnemyManager:
         current_time = time.time()
         if current_time - self.last_enemy_spawn_time > 1:
             self.last_enemy_spawn_time = current_time
-            x = random.choice([0, self.screen_width])
-            y = random.choice([0, self.screen_height])
+
+            if random.choice([True, False]):
+                x = random.randint(0, self.screen_width)
+                y = random.choice([0, self.screen_height])
+            else:
+                x = random.choice([0, self.screen_width])
+                y = random.randint(0, self.screen_height)
             self.enemies.append(Enemy(x, y))
 
     def update_enemies(self):

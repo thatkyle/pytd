@@ -8,7 +8,7 @@ class UI:
         self.screen_width = screen_width
         self.screen_height = screen_height
         self.get_shop_number_of_items = get_shop_number_of_items
-        self.buttons = [f"{i+1}" for i in range(10)]
+        self.buttons = [f"Shop Option {i+1}" for i in range(10)]
         self.current_buttons = random.sample(self.buttons, self.shop_number_of_items)
         self.gold = 0
         self.last_gold_update = time.time()
@@ -33,6 +33,7 @@ class UI:
     def draw(self, screen):
         # Draw gold counter in the top right corner
         font = pygame.font.SysFont(styles['base_font'], styles['gold_counter']['font_size'])
+        button_font = pygame.font.SysFont(styles['base_font'], styles['shop_button']['font_size'])
         gold_text = font.render(f"Gold: {self.gold}", True, styles['gold_counter']['font_color'])
         screen.blit(gold_text, styles['gold_counter']['abs_pos'])
         
@@ -48,7 +49,7 @@ class UI:
         for i, button in enumerate(self.current_buttons):
             button_x = start_x + i * (styles['shop_button']['width'] + styles['shop_button']['right_margin'])
             pygame.draw.rect(screen, (255, 255, 255), (button_x, button_y, styles['shop_button']['width'], styles['shop_button']['height']))
-            button_text = font.render(button, True, (0, 0, 0))
+            button_text = button_font.render(button, True, (0, 0, 0))
             screen.blit(button_text, (button_x + 5, button_y + 5))
 
     def enemy_died(self):

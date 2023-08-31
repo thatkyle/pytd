@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Rotating SVG Triangle</title>
+  <style>
+    body {
+      background-color: red;
+    }
+
+    @keyframes rotate {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    #triangle {
+      animation: rotate 5s infinite linear;
+      /* Set the rotation point to the centroid of the triangle */
+      transform-origin: 250px 264.43px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Rotating SVG Triangle</h1>
+
+  <svg width="500" height="500">
+    <!-- Coordinates for an equilateral triangle with a transparent fill -->
+    <polygon id="triangle" points="250,206.7 200,293.3 300,293.3" fill="none" stroke="black" stroke-width="2"/>
+  </svg>
+
+</body>
+</html>
